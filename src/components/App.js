@@ -8,7 +8,6 @@ import hogs from '../porkers_data';
 class App extends Component {
   constructor(){
     super()
-
     this.state = {
       hogs: this.optimizeHogs(),
       filterGreased: false,
@@ -18,18 +17,18 @@ class App extends Component {
 
   optimizeHogs = () =>{
     hogs.forEach(hog =>{
-      this.renameWeight(hog)
+      this.renameWeightKey(hog)
       this.addImageToHog(hog)
-    }
-  )
-    console.log(hogs)
+      }
+    )
     return hogs
   }
 
   //rename weight key
-  renameWeight(hog){
+  renameWeightKey(hog){
     const oldKey = 'weight as a ratio of hog to LG - 24.7 Cu. Ft. French Door Refrigerator with Thru-the-Door Ice and Water'
     const newKey = 'weight'
+
     Object.defineProperty(hog, newKey,
       Object.getOwnPropertyDescriptor(hog, oldKey))
     delete hog[oldKey]
@@ -42,20 +41,6 @@ class App extends Component {
   sortHandler = (event) =>{
     const parameter = event.target.value
     this.sortHogs(parameter)
-  }
-
-  // Helper method for sorting by Hog Name
-  compare = (a,b) =>{
-    const hogA = a.name;
-    const hogB = b.name;
-
-    let comparison = 0;
-    if (hogA > hogB) {
-      comparison = 1;
-    } else if (hogA < hogB) {
-      comparison = -1;
-    }
-    return comparison;
   }
 
   compareBy = (parameter) =>{

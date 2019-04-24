@@ -15,10 +15,10 @@ class Hog extends Component {
         <div className="content">
           <div className="header">{this.props.hog.name}</div>
           <div className="meta">
-            <a>{this.props.hog.greased}</a>
+            <a>{this.props.hog.greased ? "Greased" : "Dry"}</a>
           </div>
           <div className="description">
-            Matthew is an interior designer living in New York.
+            Weight: {this.props.hog.weight} 
           </div>
         </div>
         <div className="extra content">
