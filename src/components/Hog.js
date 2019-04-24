@@ -1,16 +1,21 @@
 import React, {Component} from 'react'
 class Hog extends Component {
 
+
+  getImageURL(){
+    `${this.props.hog.image}`
+  }
   render(){
+
     return (
       <div className="card">
         <div className="image">
-          <img src="" alt="pig"/>
+          <img src={require(`../hog-imgs/${this.props.hog.image}.jpg`)} alt="pig"/>
         </div>
         <div className="content">
-          <div className="header">Matt Giampietro</div>
+          <div className="header">{this.props.hog.name}</div>
           <div className="meta">
-            <a>Friends</a>
+            <a>{this.props.hog.greased}</a>
           </div>
           <div className="description">
             Matthew is an interior designer living in New York.
