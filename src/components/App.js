@@ -17,7 +17,6 @@ class App extends Component {
   }
 
   optimizeHogs = () =>{
-
     hogs.forEach(hog =>{
       this.renameWeight(hog)
       this.addImageToHog(hog)
@@ -41,12 +40,8 @@ class App extends Component {
   }
 
   sortHandler = (event) =>{
-    const key = event.target.value
-    if (key === "name"){
-      this.sortByName()
-    } else {
-      this.sortByWeight()
-    }
+    const parameter = event.target.value
+    this.sortHogs(parameter)
   }
 
   // Helper method for sorting by Hog Name
@@ -57,21 +52,31 @@ class App extends Component {
     let comparison = 0;
     if (hogA > hogB) {
       comparison = 1;
-    } else if (hogA < hogB) { comparison = -1;
+    } else if (hogA < hogB) {
+      comparison = -1;
     }
     return comparison;
   }
 
-  sortByName = () =>{
-    const sortedHogsArray = [...this.state.hogs].sort(this.compare)
+  compareBy = (parameter) =>{
+    return function(a,b){
+      const hogA = a[parameter];
+      const hogB = b[parameter];
 
+      let comparison = 0;
+      if (hogA > hogB) {
+        comparison = 1;
+      } else if (hogA < hogB) { comparison = -1;
+      }
+      return comparison;
+    }
+  }
+
+  sortHogs = (parameter) =>{
+    const sortedHogsArray = [...this.state.hogs].sort(this.compareBy(parameter))
     this.setState({
       hogs: sortedHogsArray
     })
-  }
-
-  sortByWeight = () =>{
-
   }
 
   updateGreasedFilter = (event) =>{
@@ -79,11 +84,6 @@ class App extends Component {
     this.setState({
       filterGreased: !status
     })
-    if (this.state.filterGreased){
-      console.log("we filtering dem hawwwgz")
-    } else {
-      console.log("party on, haags")
-    }
   }
 
   render() {
