@@ -1,14 +1,20 @@
 import React, {Component} from 'react'
 class Hog extends Component {
 
+  constructor(props){
+    super(props)
+    this.state = {
+      display: 'hidden'
+    }
+  }
 
-  getImageURL(){
-    `${this.props.hog.image}`
+  showInfo = () => {
+    this.setState({display: ''})
   }
   render(){
 
     return (
-      <div className="card">
+      <div className="card" onClick={this.showInfo}>
         <div className="image">
           <img src={require(`../hog-imgs/${this.props.hog.image}.jpg`)} alt="pig"/>
         </div>
@@ -17,18 +23,10 @@ class Hog extends Component {
           <div className="meta">
             <a>{this.props.hog.greased ? "Greased" : "Dry"}</a>
           </div>
-          <div className="description">
-            Weight: {this.props.hog.weight} 
+          <div className={`description ${this.state.display}`} >
+            Weight: {this.props.hog.weight}<br/>
+            Highest Medal Achieved: {this.props.hog["highest medal achieved"]}
           </div>
-        </div>
-        <div className="extra content">
-          <span className="right floated">
-            Joined in 2013
-          </span>
-          <span>
-            <i className="user icon"></i>
-            75 Friends
-          </span>
         </div>
       </div>
       )

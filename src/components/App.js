@@ -64,10 +64,9 @@ class App extends Component {
     })
   }
 
-  updateGreasedFilter = (event) =>{
-    let status = JSON.parse(event.target.value)
+  updateGreasedFilter = () =>{
     this.setState({
-      filterGreased: !status
+      filterGreased: !this.state.filterGreased
     })
   }
 
@@ -75,8 +74,8 @@ class App extends Component {
     return (
       <div className="App">
         < Nav />
-        < Filter filterGreased={this.state.filterGreased} sortBy={this.state.sortBy} sortHandler={this.sortHandler} onFilterGreased={this.filterGreased} hogsAreFiltered={this.state.updateGreasedFilter}/>
-        < HogHolder hogs={this.state.hogs} />
+        < Filter filterGreased={this.state.filterGreased} sortBy={this.state.sortBy} sortHandler={this.sortHandler} onFilterGreased={this.updateGreasedFilter} hogsAreFiltered={this.state.updateGreasedFilter}/>
+        < HogHolder filterGreased={this.state.filterGreased} hogs={this.state.hogs} />
       </div>
     )
   }

@@ -3,7 +3,12 @@ import Hog from '../components/Hog'
 class HogHolder extends Component {
 
   renderHogs = () => {
-    return this.props.hogs.map(hog => <Hog hog={hog}/>)
+    return this.props.hogs.map((hog, index) => {
+      if (hog.greased || !this.props.filterGreased){
+        return <Hog hog={hog} key={`hog-${index}`}/>
+      }
+    }
+    )
   }
 
   render(){
